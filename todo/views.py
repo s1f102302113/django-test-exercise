@@ -3,6 +3,7 @@ from django.http import Http404
 from django.utils.timezone import make_aware
 from django.utils.dateparse import parse_datetime
 from todo.models import Task
+from django.db.models import Q
 
 
 # Create your views here.
@@ -68,3 +69,17 @@ def close(request, task_id):
     task.completed = True
     task.save()
     return redirect(index)        
+
+
+def search(request):
+    query = request.GET.get('q')
+    if query:
+        tasks = Task.objects.filter(Q(title__icontains=query))
+    else:
+        tasks = Task.objects.all()
+
+    context = {
+        'tasks': tasks,
+        'query': query
+    }
+    return render(request, 'todo/search.html', context)
