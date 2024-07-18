@@ -18,6 +18,10 @@
         <input id="titleInput" name="title" type="text" placeholder="Input title">
       </div>
       <div>
+        <label for="subjectInput">科目名</label><br>
+        <input id="subjectInput" name="subject" type="text">
+      </div>
+      <div>
         <label for="dueInput">Due at:</label><br>
         <input id="dueInput" name="due_at" type="datetime-local">
       </div>
@@ -36,6 +40,9 @@
     <div class="text">
       <h2><a href="{% url 'detail' task.id %}">{{ task.title }}</a></h2>
       <ul>
+        {% if task.subject %}
+        <li>科目: {{ task.subject }}</li>
+        {% endif %}
         <li>Posted at: {{ task.posted_at }}</li>
         {% if task.due_at %} 
         <li>Due at: {{ task.due_at }}</li>
