@@ -9,7 +9,9 @@ from todo.models import Task
 def index(request):
     if request.method == 'POST':
         task = Task(title=request.POST['title'], subject=request.POST['subject'],
-                    due_at=make_aware(parse_datetime(request.POST['due_at'])))
+                    due_at=make_aware(parse_datetime(request.POST['due_at'])),
+                    content=request.POST.get('content', '')
+                    )
         task.save()
 
     if request.GET.get('order') == 'due':
@@ -70,3 +72,16 @@ def close(request, task_id):
     task.completed = True
     task.save()
     return redirect(index)
+
+def search(request):
+    query = request.GET.get('q')
+    if query:
+        tasks = Task.objects.filter(Q(title__icontains=query))
+    else:
+        tasks = Task.objects.all()
+
+    context = {
+        'tasks': tasks,
+        'query': query
+    }
+    return render(request, 'todo/search.html', context)
