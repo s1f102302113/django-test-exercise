@@ -65,7 +65,10 @@ class TodoViewTestCase(TestCase):
 
     def test_index_post(self):
         client = Client()
-        data = {'title': 'Test Task', 'subject': 'LS', 'due_at': '2024-06-30 23:59:59'}
+        data = {
+            'title': 'Test Task', 'subject': 'LS', 'due_at': '2024-06-30 23:59:59',
+            'content': 'This is Test Task'
+            }
         response = client.post('/', data)
 
         self.assertEqual(response.status_code, 200)
@@ -99,7 +102,10 @@ class TodoViewTestCase(TestCase):
         self.assertEqual(response.context['tasks'][1], task2)
 
     def test_detail_get_success(self):
-        task = Task(title='task1', subject='LS', due_at=timezone.make_aware(datetime(2024, 7, 1)))
+        task = Task(
+            title='task1', subject='LS', due_at=timezone.make_aware(datetime(2024, 7, 1)),
+            content='This is task1'
+        )
         task.save()
         client = Client()
         response = client.get('/{}/'.format(task.pk))
