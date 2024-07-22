@@ -10,10 +10,10 @@ from django.db.models import Q
 def index(request):
     if request.method == 'POST':
         task = Task(
-            title=request.POST['title'],
-            due_at=make_aware(parse_datetime(request.POST['due_at'])),
-            content=request.POST.get('content', '')
-         )
+          title=request.POST['title'], subject=request.POST['subject'],
+          due_at=make_aware(parse_datetime(request.POST['due_at'])),
+          content=request.POST.get('content', '')
+                    )
         task.save()
 
     if request.GET.get('order') == 'due':
@@ -46,6 +46,7 @@ def update(request, task_id):
         raise Http404("Task does not exist")
     if request.method == 'POST':
         task.title = request.POST['title']
+        task.subject = request.POST['subject']
         task.due_at = make_aware(parse_datetime(request.POST['due_at']))
         task.content = request.POST.get('content', '')
         task.save()
@@ -73,8 +74,7 @@ def close(request, task_id):
         raise Http404("Task does not exist")
     task.completed = True
     task.save()
-    return redirect(index)        
-
+    return redirect(index)
 
 def search(request):
     query = request.GET.get('q')
