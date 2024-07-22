@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+  <head>
+    <title>検索結果</title>
+    <meta charset="UTF-8">
+    <meta name="author" content="INIAD">
+  </head>
+
+  <body>
+    <h1>"{{ query }}" の検索結果</h1>
+    <a href="{% url 'index' %}">Back to Top</a>
+
+    {% if tasks %}
+      {% for task in tasks %}
+      <div class="text">
+        <h2><a href="{% url 'detail' task.id %}">{{ task.title }}</a></h2>
+        <ul>
+          <li>Posted at: {{ task.posted_at }}</li>
+          {% if task.due_at %} 
+          <li>Due at: {{ task.due_at }}</li>
+          {% endif %}
+          {% if task.completed %} 
+          <li>Status: Completed</li>
+          {% else %}
+          <li>Status: Not Completed</li>
+          {% endif %}
+        </ul>
+      </div>
+      {% endfor %}
+    {% else %}
+      <p>No tasks found matching your search criteria.</p>
+    {% endif %}
+  </body>
+
+</html>
