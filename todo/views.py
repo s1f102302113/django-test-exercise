@@ -76,6 +76,7 @@ def close(request, task_id):
     task.save()
     return redirect(index)
 
+
 def search(request):
     query = request.GET.get('q')
     if query:
