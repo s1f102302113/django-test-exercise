@@ -9,35 +9,35 @@
   </head>
 
   <body>
-    <h1>Sample To Do Application</h1>
-    <p>You can submit tasks from the following form.</p>
+    <h1>Todoリスト</h1>
+    <p>フォームを入力してください。</p>
     <form action="{% url 'index' %}" method="post">
       {% csrf_token %}
       <div>
-        <label for="titleInput">Title</label><br>
-        <input id="titleInput" name="title" type="text" placeholder="Input title">
+        <label for="titleInput">課題名</label><br>
+        <input id="titleInput" name="title" type="text">
       </div>
       <div>
         <label for="subjectInput">科目名</label><br>
         <input id="subjectInput" name="subject" type="text">
       </div>
       <div>
-        <label for="dueInput">Due at:</label><br>
+        <label for="dueInput">作成日:</label><br>
         <input id="dueInput" name="due_at" type="datetime-local">
       </div>
       <div>
-        <label for="contentInput">Note:</label><br>
-        <textarea id="contentInput" name="content" placeholder="Input note">{{ task.content }}</textarea>
+        <label for="contentInput">メモ:</label><br>
+        <textarea id="contentInput" name="content">{{ task.content }}</textarea>
       </div>
       <div>
-        <button type="submit">Submit</button>
+        <button type="submit">作成</button>
       </div>
     </form>
     <br>
 
     <div>
       <form action="{% url 'search' %}" method="get">
-        <input type="text" name="q" placeholder="Search tasks">
+        <input type="text" name="q" placeholder="タスクを探す">
         <button type="submit">検索</button>
       </form>
     </div>
@@ -53,8 +53,8 @@
     <br>
 
     <div>
-      <a href="{% url 'index' %}?order=due">Sort by Due Date</a> |
-      <a href="{% url 'index' %}?order=post">Sort by Posted Date</a>
+      <a href="{% url 'index' %}?order=due">締め切り順に並び替える</a> |
+      <a href="{% url 'index' %}?order=post">投稿順に並び替える</a>
     </div>
 
     {% for task in tasks %}
@@ -64,15 +64,15 @@
         {% if task.subject %}
         <li>科目: {{ task.subject }}</li>
         {% endif %}
-        <li>Posted at: {{ task.posted_at }}</li>
+        <li>作成日: {{ task.posted_at }}</li>
         {% if task.due_at %} 
-        <li>Due at: {{ task.due_at }}</li>
+        <li>締め切り: {{ task.due_at }}</li>
         {% endif %}
-        <li>Content: {{ task.content }}</li>
+        <li>メモ: {{ task.content }}</li>
         {% if task.completed %} 
-        <li>Status: Completed</li>
+        <li>達成状況: 済</li>
         {% else %}
-        <li>Status: Not Completed</li>
+        <li>達成状況: 未</li>
         {% endif %}
       </ul>
     </div>

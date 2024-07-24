@@ -9,12 +9,12 @@
   </head>
 
   <body>
-    <h1>Edit task</h1>
-    <p>You can edit tasks from the following form.</p>
+    <h1>編集</h1>
+    <p>変更したら保存ボタンを押してください。</p>
     <form action="{% url 'update' task.id%}" method="post">
       {% csrf_token %}
       <div>
-        <label for="titleInput">Title</label><br>
+        <label for="titleInput">課題名</label><br>
         <input id="titleInput" name="title" type="text" placeholder="Input title" value="{{ task.title }}">
       </div>
       <div>
@@ -22,15 +22,15 @@
         <input id="subjectInput" name="subject" type="text">
       </div>
       <div>
-        <label for="dueInput">Due at:</label><br>
+        <label for="dueInput">締め切り:</label><br>
         <input id="dueInput" name="due_at" type="datetime-local" value="{{ task.due_at |date:"Y-m-d H:i" }}">
       </div>
       <div>
-        <label for="contentInput">Note:</label><br>
-        <textarea id="contentInput" name="content" placeholder="Input note">{{ task.content }}</textarea>
+        <label for="contentInput">メモ:</label><br>
+        <textarea id="contentInput" name="content">{{ task.content }}</textarea>
       </div>
       <div>
-        <button type="submit">Submit</button>
+        <button type="submit">保存</button>
       </div>
     </form>
     <br>
