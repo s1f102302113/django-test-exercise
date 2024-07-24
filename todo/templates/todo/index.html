@@ -9,13 +9,13 @@
   </head>
 
   <body>
-    <h1>Sample To Do Application</h1>
-    <p>You can submit tasks from the following form.</p>
+    <h1>Todoリスト</h1>
+    <p>フォームを入力してください。</p>
     <form action="{% url 'index' %}" method="post">
       {% csrf_token %}
       <div>
-        <label for="titleInput">Title</label><br>
-        <input id="titleInput" name="title" type="text" placeholder="Input title">
+        <label for="titleInput">課題名</label><br>
+        <input id="titleInput" name="title" type="text">
       </div>
       <div>
         <label for="subjectInput">科目名</label><br>
@@ -57,13 +57,13 @@
         {% endif %}
         <li>Posted at: {{ task.posted_at }}</li>
         {% if task.due_at %} 
-        <li>Due at: {{ task.due_at }}</li>
+        <li>締め切り日: {{ task.due_at }}</li>
         {% endif %}
         <li>Content: {{ task.content }}</li>
         {% if task.completed %} 
-        <li>Status: Completed</li>
+        <li>達成状況: 済</li>
         {% else %}
-        <li>Status: Not Completed</li>
+        <li>達成状況: 未</li>
         {% endif %}
       </ul>
     </div>
