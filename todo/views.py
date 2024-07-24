@@ -89,3 +89,17 @@ def search(request):
         'query': query
     }
     return render(request, 'todo/search.html', context)
+
+
+def search_subject(request):
+    query_s = request.GET.get('q_s')
+    if query_s:
+        tasks = Task.objects.filter(Q(subject__icontains=query_s))
+    else:
+        tasks = Task.objects.all()
+
+    context = {
+        'tasks': tasks,
+        'query_s': query_s
+    }
+    return render(request, 'todo/search_subject.html', context)
