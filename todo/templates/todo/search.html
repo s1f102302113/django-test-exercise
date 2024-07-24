@@ -16,12 +16,17 @@
       <div class="text">
         <h2><a href="{% url 'detail' task.id %}">{{ task.title }}</a></h2>
         <ul>
-          <li>作成日: {{ task.posted_at }}</li>
-          {% if task.due_at %} 
+
+          {% if task.subject %}
+          <li>科目: {{ task.subject }}</li>
+          {% endif %}
+          <li>投稿: {{ task.posted_at }}</li>
+          {% if task.due_at %}
           <li>締め切り: {{ task.due_at }}</li>
           {% endif %}
-          {% if task.completed %} 
-          <li>Status: 済</li>
+          <li>Note: {{ task.content }}</li>
+          {% if task.completed %}
+          <li>Status: Completed</li>
           {% else %}
           <li>Status: 未</li>
           {% endif %}

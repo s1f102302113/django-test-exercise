@@ -44,8 +44,17 @@
     <br>
 
     <div>
-      <a href="{% url 'index' %}?order=due">締め切りで並び替える</a> |
-      <a href="{% url 'index' %}?order=post">作成日で並び替える</a>
+      <label for="contentInput">科目名から検索</label><br>
+      <form action="{% url 'search_subject' %}" method="get">
+        <input type="text" name="q_s" placeholder="Search tasks">
+        <button type="submit">検索</button>
+      </form>
+    </div>
+    <br>
+
+    <div>
+      <a href="{% url 'index' %}?order=due">締め切り順に並び替える</a> |
+      <a href="{% url 'index' %}?order=post">投稿順に並び替える</a>
     </div>
 
     {% for task in tasks %}
