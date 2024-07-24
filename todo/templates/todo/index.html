@@ -18,13 +18,38 @@
         <input id="titleInput" name="title" type="text" placeholder="Input title">
       </div>
       <div>
+        <label for="subjectInput">科目名</label><br>
+        <input id="subjectInput" name="subject" type="text">
+      </div>
+      <div>
         <label for="dueInput">Due at:</label><br>
         <input id="dueInput" name="due_at" type="datetime-local">
+      </div>
+      <div>
+        <label for="contentInput">Note:</label><br>
+        <textarea id="contentInput" name="content" placeholder="Input note">{{ task.content }}</textarea>
       </div>
       <div>
         <button type="submit">Submit</button>
       </div>
     </form>
+    <br>
+
+    <div>
+      <form action="{% url 'search' %}" method="get">
+        <input type="text" name="q" placeholder="Search tasks">
+        <button type="submit">検索</button>
+      </form>
+    </div>
+    <br>
+
+    <div>
+      <label for="contentInput">科目名から検索</label><br>
+      <form action="{% url 'search_subject' %}" method="get">
+        <input type="text" name="q_s" placeholder="Search tasks">
+        <button type="submit">検索</button>
+      </form>
+    </div>
     <br>
 
     <div>
@@ -36,10 +61,14 @@
     <div class="text">
       <h2><a href="{% url 'detail' task.id %}">{{ task.title }}</a></h2>
       <ul>
+        {% if task.subject %}
+        <li>科目: {{ task.subject }}</li>
+        {% endif %}
         <li>Posted at: {{ task.posted_at }}</li>
         {% if task.due_at %} 
         <li>Due at: {{ task.due_at }}</li>
         {% endif %}
+        <li>Content: {{ task.content }}</li>
         {% if task.completed %} 
         <li>Status: Completed</li>
         {% else %}

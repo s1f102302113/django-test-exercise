@@ -18,8 +18,16 @@
         <input id="titleInput" name="title" type="text" placeholder="Input title" value="{{ task.title }}">
       </div>
       <div>
+        <label for="subjectInput">科目名</label><br>
+        <input id="subjectInput" name="subject" type="text">
+      </div>
+      <div>
         <label for="dueInput">Due at:</label><br>
         <input id="dueInput" name="due_at" type="datetime-local" value="{{ task.due_at |date:"Y-m-d H:i" }}">
+      </div>
+      <div>
+        <label for="contentInput">Note:</label><br>
+        <textarea id="contentInput" name="content" placeholder="Input note">{{ task.content }}</textarea>
       </div>
       <div>
         <button type="submit">Submit</button>
