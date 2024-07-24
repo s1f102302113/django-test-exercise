@@ -22,15 +22,15 @@
         <input id="subjectInput" name="subject" type="text">
       </div>
       <div>
-        <label for="dueInput">Due at:</label><br>
+        <label for="dueInput">締め切り:</label><br>
         <input id="dueInput" name="due_at" type="datetime-local" value="{{ task.due_at |date:"Y-m-d H:i" }}">
       </div>
       <div>
-        <label for="contentInput">Note:</label><br>
-        <textarea id="contentInput" name="content" placeholder="Input note">{{ task.content }}</textarea>
+        <label for="contentInput">メモ:</label><br>
+        <textarea id="contentInput" name="content">{{ task.content }}</textarea>
       </div>
       <div>
-        <button type="submit">Submit</button>
+        <button type="submit">保存</button>
       </div>
     </form>
     <br>
