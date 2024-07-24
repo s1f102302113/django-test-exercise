@@ -128,7 +128,7 @@ class TodoViewTestCase(TestCase):
         task = Task(title='task1', due_at=timezone.make_aware(datetime(2024, 7, 1)))
         task.save()
         client = Client()
-        data = {'title': 'Updated Task', 'due_at': '2024-07-01 23:59:59'}
+        data = {'title': 'Updated Task', 'subject':'LS', 'due_at': '2024-07-01 23:59:59'}
         response = client.post('/{}/update'.format(task.pk), data)
 
         self.assertEqual(response.status_code, 302)  # Redirect to detail view
@@ -138,7 +138,7 @@ class TodoViewTestCase(TestCase):
 
     def test_update_post_invalid_task(self):
         client = Client()
-        data = {'title': 'Updated Task', 'due_at': '2024-07-01 23:59:59'}
+        data = {'title': 'Updated Task', 'subject':'LS', 'due_at': '2024-07-01 23:59:59'}
         response = client.post('/999/update', data)  # Non-existent task
 
         self.assertEqual(response.status_code, 404)
